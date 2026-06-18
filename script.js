@@ -378,18 +378,35 @@ function afficherResultats() {
     const infoPrincipale = branches[principale[0]];
     const pourcent1 = Math.round((principale[1] / scoreMax) * 100);
 
-    document.getElementById('resultat-principal').innerHTML = `
-        <div class="carte-resultat carte-principale">
-            <h3>🥇 Ta branche idéale</h3>
-            <h2>${infoPrincipale.nom}</h2>
-            <p>${infoPrincipale.desc}</p>
-            <div class="score-bar">
-                <div class="score-fill" style="width:${pourcent1}%"></div>
-            </div>
-            <p class="score-texte">Compatibilité : <strong>${pourcent1}%</strong></p>
-            <div class="tags">
-                <span class="tag">📚 ${infoPrincipale.ressources}</span>
-            </div>
+    const classementFinal = classement;
+    const branchePrincipale = branches[classementFinal[0][0]].nom;
+    const alt1Final = branches[classementFinal[1][0]].nom;
+    const alt2Final = branches[classementFinal[2][0]].nom;
+
+    const messageWhatsApp = encodeURIComponent(
+        `🎯 *Mon résultat OrientaInfo*\n\n` +
+        `🥇 Branche idéale : *${branchePrincipale}*\n` +
+        `🥈 Alternative 1 : *${alt1Final}*\n` +
+        `🥉 Alternative 2 : *${alt2Final}*\n\n` +
+        `💬 Mon avis sur l'app : \n\n` +
+        `🔗 Testez aussi : https://Ultimo0.github.io/orientainfo`
+    );
+
+    const lienWhatsApp = `https://wa.me/237652492874 ERO?text=${messageWhatsApp}`;
+
+    document.getElementById('resultat-alternatives').innerHTML =
+        htmlAlternatives + htmlToutes;
+
+    // Ajouter bouton WhatsApp
+    document.getElementById('resultat-alternatives').innerHTML +=  `
+        <div class="carte-whatsapp">
+            <h3>💬 Donne ton avis !</h3>
+            <p>Tu as aimé OrientaInfo ? Envoie-nous ton retour directement sur WhatsApp !</p>
+            <a href="${lienWhatsApp}" target="_blank" class="btn-whatsapp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+                    width="24" height="24" alt="WhatsApp"/>
+                Envoyer mon avis sur WhatsApp
+            </a>
         </div>
     `;
 

@@ -504,3 +504,36 @@ h1 {
         font-size: 1.5em;
     }
 }
+
+/* ========== WHATSAPP ========== */
+.carte-whatsapp {
+    background: linear-gradient(135deg, rgba(37,211,102,0.2), rgba(18,140,126,0.2));
+    border: 2px solid rgba(37,211,102,0.4);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.carte-whatsapp h3 {
+    color: #25D366;
+    margin-bottom: 10px;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1em;
+    margin-top: 15px;
+    transition: transform 0.2s;
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+}
