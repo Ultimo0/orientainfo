@@ -14,9 +14,7 @@ const particulesList = [];
 const NOMBRE_PARTICULES = 80;
 
 class Particule {
-    constructor() {
-        this.reset();
-    }
+    constructor() { this.reset(); }
 
     reset() {
         this.x = Math.random() * canvas.width;
@@ -30,10 +28,10 @@ class Particule {
 
     choisirCouleur() {
         const couleurs = [
-            '102, 126, 234',  // bleu violet
-            '118, 75, 162',   // violet
-            '255, 255, 255',  // blanc
-            '100, 200, 255',  // bleu clair
+            '102, 126, 234',
+            '118, 75, 162',
+            '255, 255, 255',
+            '100, 200, 255',
         ];
         return couleurs[Math.floor(Math.random() * couleurs.length)];
     }
@@ -48,30 +46,23 @@ class Particule {
     bouger() {
         this.x += this.vitesseX;
         this.y += this.vitesseY;
-
-        // Rebondir sur les bords
         if (this.x < 0 || this.x > canvas.width) this.vitesseX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vitesseY *= -1;
-
-        // Scintiller
         this.opacite += (Math.random() - 0.5) * 0.02;
         this.opacite = Math.max(0.05, Math.min(0.6, this.opacite));
     }
 }
 
-// Créer les particules
 for (let i = 0; i < NOMBRE_PARTICULES; i++) {
     particulesList.push(new Particule());
 }
 
-// Relier les particules proches
 function relierParticules() {
     for (let i = 0; i < particulesList.length; i++) {
         for (let j = i + 1; j < particulesList.length; j++) {
             const dx = particulesList[i].x - particulesList[j].x;
             const dy = particulesList[i].y - particulesList[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-
             if (distance < 120) {
                 ctx.beginPath();
                 ctx.moveTo(particulesList[i].x, particulesList[i].y);
@@ -84,15 +75,9 @@ function relierParticules() {
     }
 }
 
-// Animer
 function animerParticules() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particulesList.forEach(p => {
-        p.bouger();
-        p.dessiner();
-    });
-
+    particulesList.forEach(p => { p.bouger(); p.dessiner(); });
     relierParticules();
     requestAnimationFrame(animerParticules);
 }
@@ -291,6 +276,7 @@ const branches = {
         duree: "8-10 mois pour les bases"
     }
 };
+
 // ========== VARIABLES ==========
 let questionActuelle = 0;
 let scores = { WEB: 0, MOB: 0, SEC: 0, IA: 0, UX: 0, DATA: 0, CLOUD: 0, GAME: 0 };
@@ -304,16 +290,12 @@ function demarrer() {
 
 function afficherQuestion() {
     const q = questions[questionActuelle];
-
-    // Mettre à jour le numéro
     document.getElementById('num-question').textContent = questionActuelle + 1;
 
-    // Mettre à jour la barre
     const pourcent = Math.round((questionActuelle / questions.length) * 100);
     document.getElementById('barre-fill').style.width = pourcent + '%';
     document.getElementById('pourcent-progress').textContent = pourcent + '%';
 
-    // Afficher la question
     document.getElementById('question-texte').textContent = q.texte;
 
     const optionsDiv = document.getElementById('options');
@@ -331,12 +313,10 @@ function afficherQuestion() {
 function choisirOption(index) {
     const option = questions[questionActuelle].options[index];
 
-    // Ajouter les scores
     for (let branche in option.scores) {
         scores[branche] += option.scores[branche];
     }
 
-    // Animation de sortie
     const container = document.getElementById('page-questions');
     container.classList.add('animer-sortie');
 
@@ -347,10 +327,7 @@ function choisirOption(index) {
         if (questionActuelle < questions.length) {
             afficherQuestion();
             container.classList.add('animer-entree');
-
-            setTimeout(() => {
-                container.classList.remove('animer-entree');
-            }, 400);
+            setTimeout(() => container.classList.remove('animer-entree'), 400);
         } else {
             afficherResultats();
         }
@@ -363,92 +340,78 @@ function afficherResultats() {
 
     lancerConfettis();
 
-    // Trier les branches par score
-    const classement = Object.entries(scores)
-        .sort((a, b) => b[1] - a[1]);
-
+    const classement = Object.entries(scores).sort((a, b) => b[1] - a[1]);
     const scoreMax = classement[0][1];
 
-    // Barre à 100% à la fin
     document.getElementById('barre-fill').style.width = '100%';
     document.getElementById('pourcent-progress').textContent = '100%';
 
-    // Branche principale
     const principale = classement[0];
     const infoPrincipale = branches[principale[0]];
     const pourcent1 = Math.round((principale[1] / scoreMax) * 100);
 
-    const classementFinal = classement;
-    const branchePrincipale = branches[classementFinal[0][0]].nom;
-    const alt1Final = branches[classementFinal[1][0]].nom;
-    const alt2Final = branches[classementFinal[2][0]].nom;
-
-    const messageWhatsApp = encodeURIComponent(
-        `🎯 *Mon résultat OrientaInfo*\n\n` +
-        `🥇 Branche idéale : *${branchePrincipale}*\n` +
-        `🥈 Alternative 1 : *${alt1Final}*\n` +
-        `🥉 Alternative 2 : *${alt2Final}*\n\n` +
-        `💬 Mon avis sur l'app : \n\n` +
-        `🔗 Testez aussi : https://Ultimo0.github.io/orientainfo`
-    );
-
-    const lienWhatsApp = `https://wa.me/237652492874 ERO?text=${messageWhatsApp}`;
-
-    document.getElementById('resultat-alternatives').innerHTML =
-        htmlAlternatives + htmlToutes;
-
-    // Ajouter bouton WhatsApp
-    document.getElementById('resultat-alternatives').innerHTML +=  `
-        <div class="carte-whatsapp">
-            <h3>💬 Donne ton avis !</h3>
-            <p>Tu as aimé OrientaInfo ? Envoie-nous ton retour directement sur WhatsApp !</p>
-            <a href="${lienWhatsApp}" target="_blank" class="btn-whatsapp">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-                    width="24" height="24" alt="WhatsApp"/>
-                Envoyer mon avis sur WhatsApp
-            </a>
+    document.getElementById('resultat-principal').innerHTML = `
+        <div class="carte-resultat carte-principale">
+            <h3>🥇 Ta branche idéale</h3>
+            <h2>${infoPrincipale.nom}</h2>
+            <p>${infoPrincipale.desc}</p>
+            <div class="score-bar">
+                <div class="score-fill" style="width:${pourcent1}%"></div>
+            </div>
+            <p class="score-texte">Compatibilité : <strong>${pourcent1}%</strong></p>
+            <div class="info-grid">
+                <div class="info-bloc">
+                    <h4>💼 Débouchés</h4>
+                    <ul>${infoPrincipale.debouches.map(d => `<li>${d}</li>`).join('')}</ul>
+                </div>
+                <div class="info-bloc">
+                    <h4>💰 Salaire moyen</h4>
+                    <p class="salaire">${infoPrincipale.salaire}</p>
+                    <h4>⏱️ Durée d'apprentissage</h4>
+                    <p class="duree">${infoPrincipale.duree}</p>
+                </div>
+            </div>
+            <div class="tags">
+                <span class="tag">📚 ${infoPrincipale.ressources}</span>
+            </div>
         </div>
     `;
 
-    // Alternatives
     let htmlAlternatives = '<h3 class="titre-alternatives">🎯 Tes branches alternatives</h3>';
     const medailles = ['🥈', '🥉'];
 
     for (let i = 1; i <= 2; i++) {
-    const alt = classement[i];
-    const infoAlt = branches[alt[0]];
-    const pourcentAlt = Math.round((alt[1] / scoreMax) * 100);
+        const alt = classement[i];
+        const infoAlt = branches[alt[0]];
+        const pourcentAlt = Math.round((alt[1] / scoreMax) * 100);
 
-    htmlAlternatives += `
-        <div class="carte-resultat">
-            <h3>${medailles[i-1]} ${infoAlt.nom}</h3>
-            <p>${infoAlt.desc}</p>
-            <div class="score-bar">
-                <div class="score-fill" style="width:${pourcentAlt}%"></div>
-            </div>
-            <p class="score-texte">Compatibilité : <strong>${pourcentAlt}%</strong></p>
-            <div class="info-grid">
-                <div class="info-bloc">
-                    <h4>💼 Débouchés</h4>
-                    <ul>
-                        ${infoAlt.debouches.map(d => `<li>${d}</li>`).join('')}
-                    </ul>
+        htmlAlternatives += `
+            <div class="carte-resultat">
+                <h3>${medailles[i-1]} ${infoAlt.nom}</h3>
+                <p>${infoAlt.desc}</p>
+                <div class="score-bar">
+                    <div class="score-fill" style="width:${pourcentAlt}%"></div>
                 </div>
-                <div class="info-bloc">
-                    <h4>💰 Salaire</h4>
-                    <p class="salaire">${infoAlt.salaire}</p>
-                    <h4>⏱️ Durée</h4>
-                    <p class="duree">${infoAlt.duree}</p>
+                <p class="score-texte">Compatibilité : <strong>${pourcentAlt}%</strong></p>
+                <div class="info-grid">
+                    <div class="info-bloc">
+                        <h4>💼 Débouchés</h4>
+                        <ul>${infoAlt.debouches.map(d => `<li>${d}</li>`).join('')}</ul>
+                    </div>
+                    <div class="info-bloc">
+                        <h4>💰 Salaire</h4>
+                        <p class="salaire">${infoAlt.salaire}</p>
+                        <h4>⏱️ Durée</h4>
+                        <p class="duree">${infoAlt.duree}</p>
+                    </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">📚 ${infoAlt.ressources}</span>
                 </div>
             </div>
-            <div class="tags">
-                <span class="tag">📚 ${infoAlt.ressources}</span>
-            </div>
-        </div>
-    `;
-}
+        `;
+    }
 
-    // Toutes les branches avec leurs scores
     let htmlToutes = '<h3 class="titre-alternatives">📊 Ton classement complet</h3>';
     htmlToutes += '<div class="classement-complet">';
 
@@ -469,36 +432,8 @@ function afficherResultats() {
 
     htmlToutes += '</div>';
 
-    document.getElementById('resultat-principal').innerHTML = `
-    <div class="carte-resultat carte-principale">
-        <h3>🥇 Ta branche idéale</h3>
-        <h2>${infoPrincipale.nom}</h2>
-        <p>${infoPrincipale.desc}</p>
-        <div class="score-bar">
-            <div class="score-fill" style="width:${pourcent1}%"></div>
-        </div>
-        <p class="score-texte">Compatibilité : <strong>${pourcent1}%</strong></p>
-
-        <div class="info-grid">
-            <div class="info-bloc">
-                <h4>💼 Débouchés</h4>
-                <ul>
-                    ${infoPrincipale.debouches.map(d => `<li>${d}</li>`).join('')}
-                </ul>
-            </div>
-            <div class="info-bloc">
-                <h4>💰 Salaire moyen</h4>
-                <p class="salaire">${infoPrincipale.salaire}</p>
-                <h4>⏱️ Durée d'apprentissage</h4>
-                <p class="duree">${infoPrincipale.duree}</p>
-            </div>
-        </div>
-
-        <div class="tags">
-            <span class="tag">📚 ${infoPrincipale.ressources}</span>
-        </div>
-    </div>
-`;
+    document.getElementById('resultat-alternatives').innerHTML =
+        htmlAlternatives + htmlToutes;
 }
 
 function recommencer() {
@@ -544,10 +479,27 @@ function copierLien() {
     afficherNotification('🔗 Lien copié dans le presse-papier !');
 }
 
+function envoyerWhatsApp() {
+    const classement = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const branchePrincipale = branches[classement[0][0]].nom;
+    const alt1Final = branches[classement[1][0]].nom;
+    const alt2Final = branches[classement[2][0]].nom;
+
+    const messageWhatsApp = encodeURIComponent(
+        `🎯 *Mon résultat OrientaInfo*\n\n` +
+        `🥇 Branche idéale : *${branchePrincipale}*\n` +
+        `🥈 Alternative 1 : *${alt1Final}*\n` +
+        `🥉 Alternative 2 : *${alt2Final}*\n\n` +
+        `💬 Mon avis sur l'app : \n\n` +
+        `🔗 Testez aussi : https://Ultimo0.github.io/orientainfo`
+    );
+
+    const lienWhatsApp = `https://wa.me/TONNUMERO?text=${messageWhatsApp}`;
+    window.open(lienWhatsApp, '_blank');
+}
+
 // ========== CONFETTIS ==========
 function lancerConfettis() {
-
-    // Vague 1 — gauche
     confetti({
         particleCount: 80,
         angle: 60,
@@ -556,7 +508,6 @@ function lancerConfettis() {
         colors: ['#667eea', '#764ba2', '#ffffff', '#4facfe']
     });
 
-    // Vague 2 — droite
     confetti({
         particleCount: 80,
         angle: 120,
@@ -565,7 +516,6 @@ function lancerConfettis() {
         colors: ['#667eea', '#764ba2', '#ffffff', '#FFD700']
     });
 
-    // Vague 3 — centre après 0.5s
     setTimeout(() => {
         confetti({
             particleCount: 100,
@@ -577,7 +527,6 @@ function lancerConfettis() {
         });
     }, 500);
 
-    // Vague 4 — pluie finale après 1s
     setTimeout(() => {
         confetti({
             particleCount: 50,
@@ -594,7 +543,6 @@ function lancerConfettis() {
 // ========== COMPTEUR ANIMÉ ==========
 function animerCompteurs() {
     const compteurs = document.querySelectorAll('.stat-nombre');
-
     compteurs.forEach(compteur => {
         const cible = parseInt(compteur.getAttribute('data-target'));
         const duree = 1500;
@@ -612,7 +560,6 @@ function animerCompteurs() {
     });
 }
 
-// Lancer les compteurs au chargement
 window.addEventListener('load', () => {
     setTimeout(animerCompteurs, 800);
 });

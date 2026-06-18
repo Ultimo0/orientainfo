@@ -9,41 +9,41 @@
 </head>
 <body>
 
-    <canvas id="particules"></canvas>
+<canvas id="particules"></canvas>
 
     <!-- Page Accueil -->
     <div id="page-accueil">
-    <h1>OrientaInfo</h1>
-    <p>Tu débutes en informatique et tu ne sais pas quelle branche choisir ?</p>
-    <p>Réponds à 15 questions et découvre la branche faite pour toi !</p>
+        <h1>🎯 OrientaInfo</h1>
+        <p>Tu débutes en informatique et tu ne sais pas quelle branche choisir ?</p>
+        <p>Réponds à 15 questions et découvre la branche faite pour toi !</p>
 
-    <div class="stats-accueil">
-        <div class="stat">
-            <span class="stat-nombre" data-target="8">0</span>
-            <span class="stat-label">Branches</span>
+        <div class="stats-accueil">
+            <div class="stat">
+                <span class="stat-nombre" data-target="8">0</span>
+                <span class="stat-label">Branches</span>
+            </div>
+            <div class="stat">
+                <span class="stat-nombre" data-target="15">0</span>
+                <span class="stat-label">Questions</span>
+            </div>
+            <div class="stat">
+                <span class="stat-nombre" data-target="3">0</span>
+                <span class="stat-label">Résultats</span>
+            </div>
         </div>
-        <div class="stat">
-            <span class="stat-nombre" data-target="15">0</span>
-            <span class="stat-label">Questions</span>
-        </div>
-        <div class="stat">
-            <span class="stat-nombre" data-target="3">0</span>
-            <span class="stat-label">Résultats</span>
-        </div>
+
+        <button onclick="demarrer()">Commencer le test →</button>
     </div>
-
-    <button onclick="demarrer()">Commencer le test →</button>
-</div>
 
     <!-- Page Questions -->
     <div id="page-questions" class="cache">
-    <div id="progress">
-        Question <span id="num-question">1</span> / 15
-        <div id="barre-container">
-            <div id="barre-fill"></div>
+        <div id="progress">
+            Question <span id="num-question">1</span> / 15
+            <div id="barre-container">
+                <div id="barre-fill"></div>
+            </div>
+            <span id="pourcent-progress">0%</span>
         </div>
-        <span id="pourcent-progress">0%</span>
-    </div>
         <div id="question-texte"></div>
         <div id="options"></div>
     </div>
@@ -53,14 +53,18 @@
         <h2>🏆 Tes résultats</h2>
         <div id="resultat-principal"></div>
         <div id="resultat-alternatives"></div>
-    <div class="boutons-fin">
-        <button onclick="recommencer()">🔄 Recommencer le test</button>
-        <button onclick="partager()" class="btn-partager">📤 Partager mes résultats</button>
-        <button onclick="copierLien()" class="btn-copier">🔗 Copier le lien</button>
-    </div>
+        <div class="boutons-fin">
+            <button onclick="recommencer()">🔄 Recommencer le test</button>
+            <button onclick="partager()" class="btn-partager">📤 Partager mes résultats</button>
+            <button onclick="copierLien()" class="btn-copier">🔗 Copier le lien</button>
+            <button onclick="envoyerWhatsApp()" class="btn-whatsapp-fin">
+                💬 Envoyer mon avis sur WhatsApp
+            </button>
+        </div>
     </div>
 
-    <script src="script.js"></script>
     <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
