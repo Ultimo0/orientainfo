@@ -494,7 +494,7 @@ function envoyerWhatsApp() {
         `🔗 Testez aussi : https://Ultimo0.github.io/orientainfo`
     );
 
-    const lienWhatsApp = `https://wa.me/TONNUMERO?text=${messageWhatsApp}`;
+    const lienWhatsApp = `https://wa.me/237652492874?text=${messageWhatsApp}`;
     window.open(lienWhatsApp, '_blank');
 }
 
