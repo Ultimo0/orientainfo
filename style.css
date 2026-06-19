@@ -362,3 +362,76 @@ button:hover { transform: scale(1.05); }
     h1 { font-size: 1.5em; }
     .option-btn { font-size: 0.85em; padding: 10px; }
 }
+
+/* ========== AUTHENTIFICATION ========== */
+.input-auth {
+    display: block;
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1em;
+    margin: 10px 0;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.input-auth:focus {
+    border-color: #667eea;
+}
+
+.input-auth::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tab {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.tab.actif {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-color: transparent;
+}
+
+.skip {
+    cursor: pointer;
+    color: #aaa;
+    font-size: 0.9em;
+    margin-top: 15px;
+    text-decoration: underline;
+}
+
+.skip:hover { color: white; }
+
+#message-auth {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+}
+
+.message-succes {
+    background: rgba(76,175,80,0.2);
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.message-erreur {
+    background: rgba(244,67,54,0.2);
+    border: 1px solid #f44336;
+    color: #f44336;
+}

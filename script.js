@@ -1,3 +1,103 @@
+// ========== AUTHENTIFICATION ==========
+const API = 'http://localhost:3000';
+let utilisateurConnecte = null;
+
+// Afficher la page connexion au démarrage
+window.addEventListener('load', () => {
+    document.getElementById('page-connexion').classList.remove('cache');
+    setTimeout(animerCompteurs, 800);
+});
+
+function afficherTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('actif'));
+
+    if (tab === 'login') {
+        document.getElementById('form-login').classList.remove('cache');
+        document.getElementById('form-inscription').classList.add('cache');
+        document.querySelectorAll('.tab')[0].classList.add('actif');
+    } else {
+        document.getElementById('form-login').classList.add('cache');
+        document.getElementById('form-inscription').classList.remove('cache');
+        document.querySelectorAll('.tab')[1].classList.add('actif');
+    }
+}
+
+function afficherMessage(message, type) {
+    const div = document.getElementById('message-auth');
+    div.textContent = message;
+    div.className = type === 'succes' ? 'message-succes' : 'message-erreur';
+}
+
+async function seConnecter() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    if (!email || !password) {
+        afficherMessage('Remplis tous les champs !', 'erreur');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API}/connexion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, mot_de_passe: password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            utilisateurConnecte = data.utilisateur;
+            localStorage.setItem('token', data.token);
+            afficherMessage('✅ Connexion réussie !', 'succes');
+            setTimeout(allerAccueil, 1000);
+        } else {
+            afficherMessage(data.message, 'erreur');
+        }
+    } catch (err) {
+        afficherMessage('Erreur de connexion au serveur', 'erreur');
+    }
+}
+
+async function sInscrire() {
+    const nom = document.getElementById('inscription-nom').value;
+    const email = document.getElementById('inscription-email').value;
+    const password = document.getElementById('inscription-password').value;
+
+    if (!nom || !email || !password) {
+        afficherMessage('Remplis tous les champs !', 'erreur');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API}/inscription`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nom, email, mot_de_passe: password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            afficherMessage('✅ Compte créé ! Connecte-toi maintenant.', 'succes');
+            setTimeout(() => afficherTab('login'), 1500);
+        } else {
+            afficherMessage(data.message, 'erreur');
+        }
+    } catch (err) {
+        afficherMessage('Erreur de connexion au serveur', 'erreur');
+    }
+}
+
+function passer() {
+    allerAccueil();
+}
+
+function allerAccueil() {
+    document.getElementById('page-connexion').classList.add('cache');
+    document.getElementById('page-accueil').classList.remove('cache');
+}
+
 // ========== PARTICULES ==========
 const canvas = document.getElementById('particules');
 const ctx = canvas.getContext('2d');
@@ -339,6 +439,19 @@ function afficherResultats() {
     document.getElementById('page-resultats').classList.remove('cache');
 
     lancerConfettis();
+
+    // Sauvegarder le résultat si connecté
+    const token = localStorage.getItem('token');
+    if (token) {
+        const classementTemp = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+        const branchePrincipale = classementTemp[0][0];
+
+    fetch(`${API}/sauvegarder-resultat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, branche_principale: branchePrincipale })
+    });
+}
 
     const classement = Object.entries(scores).sort((a, b) => b[1] - a[1]);
     const scoreMax = classement[0][1];

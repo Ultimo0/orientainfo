@@ -11,8 +11,38 @@
 
 <canvas id="particules"></canvas>
 
+    <!-- Page Connexion -->
+    <div id="page-connexion" class="cache">
+        <h1>🎯 OrientaInfo</h1>
+        <p>Connecte-toi pour sauvegarder tes résultats !</p>
+
+        <div class="tabs">
+            <button class="tab actif" onclick="afficherTab('login')">Se connecter</button>
+            <button class="tab" onclick="afficherTab('inscription')">S'inscrire</button>
+        </div>
+
+        <!-- Formulaire Connexion -->
+        <div id="form-login">
+            <input type="email" id="login-email" placeholder="📧 Ton email" class="input-auth"/>
+            <input type="password" id="login-password" placeholder="🔒 Mot de passe" class="input-auth"/>
+            <button onclick="seConnecter()">Se connecter →</button>
+            <p class="skip" onclick="passer()">Continuer sans connexion</p>
+        </div>
+
+        <!-- Formulaire Inscription -->
+        <div id="form-inscription" class="cache">
+            <input type="text" id="inscription-nom" placeholder="👤 Ton nom" class="input-auth"/>
+            <input type="email" id="inscription-email" placeholder="📧 Ton email" class="input-auth"/>
+            <input type="password" id="inscription-password" placeholder="🔒 Mot de passe" class="input-auth"/>
+            <button onclick="sInscrire()">Créer mon compte →</button>
+            <p class="skip" onclick="passer()">Continuer sans connexion</p>
+        </div>
+
+        <div id="message-auth"></div>
+    </div>
+
     <!-- Page Accueil -->
-    <div id="page-accueil">
+    <div id="page-accueil" class="cache">
         <h1>OrientaInfo</h1>
         <p>Tu débutes en informatique et tu ne sais pas quelle branche choisir ?</p>
         <p>Réponds à 15 questions et découvre la branche faite pour toi !</p>
