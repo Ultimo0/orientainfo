@@ -1,5 +1,5 @@
 // ========== AUTHENTIFICATION ==========
-const API = 'http://localhost:3000';
+const API = 'https://orientainfo-backend-1.onrender.com';
 let utilisateurConnecte = null;
 
 // Afficher la page connexion au démarrage
