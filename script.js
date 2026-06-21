@@ -37,6 +37,8 @@ async function seConnecter() {
         return;
     }
 
+    afficherMessage('⏳ Connexion en cours... (peut prendre jusqu\'à 1 min)', 'succes');
+
     try {
         const response = await fetch(`${API}/connexion`, {
             method: 'POST',
@@ -55,7 +57,7 @@ async function seConnecter() {
             afficherMessage(data.message, 'erreur');
         }
     } catch (err) {
-        afficherMessage('Erreur de connexion au serveur', 'erreur');
+        afficherMessage('⚠️ Le serveur démarre, réessaie dans 30 secondes', 'erreur');
     }
 }
 
@@ -68,6 +70,8 @@ async function sInscrire() {
         afficherMessage('Remplis tous les champs !', 'erreur');
         return;
     }
+
+    afficherMessage('⏳ Création en cours... (peut prendre jusqu\'à 1 min)', 'succes');
 
     try {
         const response = await fetch(`${API}/inscription`, {
@@ -85,7 +89,7 @@ async function sInscrire() {
             afficherMessage(data.message, 'erreur');
         }
     } catch (err) {
-        afficherMessage('Erreur de connexion au serveur', 'erreur');
+        afficherMessage('⚠️ Le serveur démarre, réessaie dans 30 secondes', 'erreur');
     }
 }
 
