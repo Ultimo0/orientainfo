@@ -193,15 +193,19 @@ const questions = [
     {
         texte: "Tu préfères travailler ?",
         options: [
-            { texte: "Seul", scores: { SEC: 2, IA: 2, DATA: 2 } },
-            { texte: "En équipe", scores: { WEB: 2, MOB: 2, CLOUD: 2 } }
+            { texte: "Seul, en autonomie totale", scores: { SEC: 2, IA: 2, DATA: 2 } },
+            { texte: "En petite équipe", scores: { WEB: 2, MOB: 2, GAME: 1 } },
+            { texte: "En grande équipe structurée", scores: { CLOUD: 2, RESEAU: 2, DATA: 1 } },
+            { texte: "Ça dépend du projet", scores: { WEB: 1, UX: 1, MOB: 1, DATA: 1 } }
         ]
     },
     {
         texte: "Tu es plutôt ?",
         options: [
-            { texte: "Créatif", scores: { UX: 3, GAME: 2, WEB: 2 } },
-            { texte: "Logique", scores: { SEC: 3, IA: 3, DATA: 2 } }
+            { texte: "Très créatif", scores: { UX: 3, GAME: 2, VR: 2 } },
+            { texte: "Plutôt créatif", scores: { WEB: 2, GAME: 1, UX: 1 } },
+            { texte: "Plutôt logique", scores: { SEC: 2, DATA: 1, CLOUD: 1 } },
+            { texte: "Très logique", scores: { SEC: 3, IA: 3, BLOCKCHAIN: 2 } }
         ]
     },
     {
@@ -214,8 +218,10 @@ const questions = [
     {
         texte: "Tu préfères ?",
         options: [
-            { texte: "Analyser des données", scores: { DATA: 3, IA: 3, CLOUD: 1 } },
-            { texte: "Construire des interfaces", scores: { UX: 3, WEB: 3, MOB: 2 } }
+            { texte: "Analyser des données et des chiffres", scores: { DATA: 3, IA: 3, CLOUD: 1 } },
+            { texte: "Construire des interfaces visuelles", scores: { UX: 3, WEB: 3, MOB: 2 } },
+            { texte: "Configurer des systèmes et infrastructures", scores: { RESEAU: 3, CLOUD: 3, EMBED: 1 } },
+            { texte: "Créer des mécanismes physiques/connectés", scores: { ROBOT: 3, EMBED: 3, VR: 1 } }
         ]
     },
     {
@@ -232,8 +238,9 @@ const questions = [
         options: [
             { texte: "📱 Applis mobiles", scores: { MOB: 3, UX: 2, WEB: 1 } },
             { texte: "🌐 Sites web", scores: { WEB: 3, UX: 2, MOB: 1 } },
-            { texte: "🎮 Jeux vidéo", scores: { GAME: 3, UX: 2, MOB: 1 } },
-            { texte: "📡 Objets connectés", scores: { CLOUD: 3, SEC: 2, IA: 2 } }
+            { texte: "🎮 Jeux vidéo", scores: { GAME: 3, VR: 2, MOB: 1 } },
+            { texte: "📡 Objets connectés (montre, maison connectée)", scores: { EMBED: 3, CLOUD: 2, RESEAU: 1 } },
+            { texte: "₿ Applications crypto / wallets", scores: { BLOCKCHAIN: 3, SEC: 2, IA: 1 } }
         ]
     },
     {
@@ -255,9 +262,10 @@ const questions = [
     {
         texte: "Tu aimes comprendre comment les choses fonctionnent ?",
         options: [
-            { texte: "Oui toujours", scores: { SEC: 3, CLOUD: 3, IA: 2 } },
-            { texte: "Parfois", scores: { WEB: 2, MOB: 2, DATA: 2 } },
-            { texte: "Non je préfère utiliser", scores: { UX: 3, GAME: 2, WEB: 2 } }
+            { texte: "Oui, jusqu'au moindre détail technique", scores: { SEC: 3, EMBED: 3, ROBOT: 2 } },
+            { texte: "Oui, surtout les systèmes", scores: { CLOUD: 3, RESEAU: 3, IA: 1 } },
+            { texte: "Parfois, ça dépend du sujet", scores: { WEB: 2, MOB: 2, DATA: 2 } },
+            { texte: "Non, je préfère juste utiliser", scores: { UX: 3, GAME: 2, WEB: 2 } }
         ]
     },
     {
@@ -271,26 +279,30 @@ const questions = [
     {
         texte: "Tu veux travailler dans quelle ambiance ?",
         options: [
-            { texte: "🏢 Grande entreprise", scores: { CLOUD: 3, DATA: 2, SEC: 2 } },
+            { texte: "🏢 Grande entreprise / banque", scores: { CLOUD: 3, RESEAU: 2, SEC: 2 } },
             { texte: "🚀 Startup", scores: { WEB: 3, MOB: 3, UX: 2 } },
-            { texte: "🏠 Freelance", scores: { UX: 3, WEB: 2, GAME: 2 } },
-            { texte: "🔬 Recherche", scores: { IA: 3, DATA: 3, SEC: 2 } }
+            { texte: "🏠 Freelance / indépendant", scores: { UX: 3, WEB: 2, GAME: 2 } },
+            { texte: "🔬 Recherche / laboratoire", scores: { IA: 3, DATA: 3, ROBOT: 2 } },
+            { texte: "🏭 Industrie / usine connectée", scores: { EMBED: 3, ROBOT: 3, RESEAU: 1 } }
         ]
     },
     {
         texte: "Ton objectif principal ?",
         options: [
-            { texte: "💰 Gagner beaucoup", scores: { CLOUD: 3, IA: 3, SEC: 2 } },
-            { texte: "🌍 Impact sur le monde", scores: { IA: 3, DATA: 2, WEB: 2 } },
-            { texte: "🎨 Exprimer ma créativité", scores: { UX: 3, GAME: 3, WEB: 2 } },
-            { texte: "🧠 Apprendre en permanence", scores: { SEC: 3, IA: 3, DATA: 2 } }
+            { texte: "💰 Gagner beaucoup", scores: { CLOUD: 3, BLOCKCHAIN: 3, SEC: 2 } },
+            { texte: "🌍 Impact sur le monde", scores: { IA: 3, DATA: 2, ROBOT: 2 } },
+            { texte: "🎨 Exprimer ma créativité", scores: { UX: 3, GAME: 3, VR: 2 } },
+            { texte: "🧠 Apprendre en permanence", scores: { SEC: 3, IA: 3, EMBED: 2 } },
+            { texte: "🛡️ Protéger / sécuriser des systèmes", scores: { SEC: 3, RESEAU: 3, CLOUD: 1 } }
         ]
     },
     {
         texte: "Tu préfères ?",
         options: [
-            { texte: "Résultats visibles rapidement", scores: { WEB: 3, UX: 3, MOB: 2 } },
-            { texte: "Projets longs et profonds", scores: { IA: 3, DATA: 3, SEC: 2 } }
+            { texte: "Résultats visibles immédiatement", scores: { WEB: 3, UX: 3, MOB: 2 } },
+            { texte: "Résultats en quelques jours", scores: { GAME: 2, EMBED: 2, MOB: 1 } },
+            { texte: "Résultats en plusieurs semaines", scores: { CLOUD: 2, RESEAU: 2, DATA: 2 } },
+            { texte: "Projets longs et profonds (mois/années)", scores: { IA: 3, DATA: 3, SEC: 2, ROBOT: 2 } }
         ]
     },
     {
@@ -304,11 +316,22 @@ const questions = [
         texte: "Dans 5 ans tu te vois ?",
         options: [
             { texte: "👨‍💻 Développeur", scores: { WEB: 3, MOB: 3, GAME: 2 } },
-            { texte: "🎨 Designer", scores: { UX: 3, GAME: 2, WEB: 2 } },
-            { texte: "🔐 Expert sécurité", scores: { SEC: 3, CLOUD: 2, IA: 2 } },
+            { texte: "🎨 Designer", scores: { UX: 3, VR: 2, WEB: 2 } },
+            { texte: "🔐 Expert sécurité", scores: { SEC: 3, RESEAU: 2, CLOUD: 2 } },
             { texte: "📊 Data Scientist", scores: { DATA: 3, IA: 3, CLOUD: 2 } },
-            { texte: "☁️ Ingénieur Cloud", scores: { CLOUD: 3, SEC: 2, DATA: 2 } },
-            { texte: "🤖 Chercheur IA", scores: { IA: 3, DATA: 3, SEC: 2 } }
+            { texte: "☁️ Ingénieur Cloud/Réseau", scores: { CLOUD: 3, RESEAU: 3, SEC: 2 } },
+            { texte: "🤖 Ingénieur Robotique/Embarqué", scores: { ROBOT: 3, EMBED: 3, IA: 2 } },
+            { texte: "⛓️ Développeur Blockchain", scores: { BLOCKCHAIN: 3, SEC: 2, WEB: 1 } }
+        ]
+    },
+    {
+        texte: "Qu'est-ce qui t'intéresse le plus parmi ça ?",
+        options: [
+            { texte: "🔧 Bidouiller des objets connectés (Arduino, capteurs)", scores: { EMBED: 3, ROBOT: 2, RESEAU: 1 } },
+            { texte: "⛓️ Les cryptomonnaies et la blockchain", scores: { BLOCKCHAIN: 3, SEC: 2, IA: 1 } },
+            { texte: "🌐 Configurer des réseaux et serveurs", scores: { RESEAU: 3, CLOUD: 2, SEC: 1 } },
+            { texte: "🥽 Créer des mondes virtuels immersifs", scores: { VR: 3, GAME: 2, UX: 1 } },
+            { texte: "🤖 Construire et programmer des robots", scores: { ROBOT: 3, EMBED: 2, IA: 1 } }
         ]
     }
 ];
@@ -378,12 +401,52 @@ const branches = {
         debouches: ["Game Developer", "Game Designer", "Level Designer", "Programmeur moteur"],
         salaire: "600$ - 5000$ / mois",
         duree: "8-10 mois pour les bases"
+    },
+    EMBED: {
+        nom: "Développement Embarqué 🔧",
+        desc: "Programme des objets physiques comme Arduino, Raspberry Pi et capteurs IoT. Tu combineras code et électronique.",
+        ressources: "Arduino.cc, Raspberry Pi Foundation, Udemy IoT",
+        debouches: ["Ingénieur embarqué", "Développeur IoT", "Ingénieur firmware", "Technicien robotique"],
+        salaire: "700$ - 6000$ / mois",
+        duree: "8-10 mois pour les bases"
+    },
+    BLOCKCHAIN: {
+        nom: "Blockchain ⛓️",
+        desc: "Crée des applications décentralisées et des smart contracts. Tu maîtriseras Solidity, Web3 et la cryptographie.",
+        ressources: "CryptoZombies, Solidity Docs, Alchemy University",
+        debouches: ["Développeur Blockchain", "Smart Contract Developer", "Architecte Web3", "Consultant crypto"],
+        salaire: "1000$ - 9000$ / mois",
+        duree: "8-10 mois pour les bases"
+    },
+    RESEAU: {
+        nom: "Administration Réseau 🌐",
+        desc: "Configure et sécurise les réseaux informatiques d'entreprise. Tu maîtriseras Cisco, les protocoles réseau et la sécurité.",
+        ressources: "Cisco Packet Tracer, CCNA, Network Chuck",
+        debouches: ["Administrateur réseau", "Ingénieur réseau", "Technicien systèmes", "Architecte réseau"],
+        salaire: "600$ - 5000$ / mois",
+        duree: "10 mois pour les bases"
+    },
+    VR: {
+        nom: "Réalité Virtuelle / Augmentée 🥽",
+        desc: "Crée des expériences immersives en VR/AR avec Unity ou Unreal Engine. Combine 3D, interaction et créativité.",
+        ressources: "Unity VR, Meta Developer, Udacity AR/VR",
+        debouches: ["Développeur VR/AR", "Designer XR", "Ingénieur immersif", "Game Developer VR"],
+        salaire: "800$ - 7000$ / mois",
+        duree: "10-12 mois pour les bases"
+    },
+    ROBOT: {
+        nom: "Robotique 🤖",
+        desc: "Conçois et programme des robots. Tu combineras mécanique, électronique et intelligence artificielle.",
+        ressources: "ROS (Robot Operating System), Coursera Robotics, MIT OpenCourseWare",
+        debouches: ["Ingénieur robotique", "Chercheur en robotique", "Développeur ROS", "Ingénieur automatisation"],
+        salaire: "900$ - 8000$ / mois",
+        duree: "12-15 mois pour les bases"
     }
 };
 
 // ========== VARIABLES ==========
 let questionActuelle = 0;
-let scores = { WEB: 0, MOB: 0, SEC: 0, IA: 0, UX: 0, DATA: 0, CLOUD: 0, GAME: 0 };
+let scores = { WEB: 0, MOB: 0, SEC: 0, IA: 0, UX: 0, DATA: 0, CLOUD: 0, GAME: 0, EMBED: 0, BLOCKCHAIN: 0, RESEAU: 0, VR: 0, ROBOT: 0 };
 
 // ========== FONCTIONS ==========
 function demarrer() {
@@ -555,7 +618,7 @@ function afficherResultats() {
 
 function recommencer() {
     questionActuelle = 0;
-    scores = { WEB: 0, MOB: 0, SEC: 0, IA: 0, UX: 0, DATA: 0, CLOUD: 0, GAME: 0 };
+    scores = { WEB: 0, MOB: 0, SEC: 0, IA: 0, UX: 0, DATA: 0, CLOUD: 0, GAME: 0, EMBED: 0, BLOCKCHAIN: 0, RESEAU: 0, VR: 0, ROBOT: 0 };
     document.getElementById('page-resultats').classList.add('cache');
     document.getElementById('page-accueil').classList.remove('cache');
 }
